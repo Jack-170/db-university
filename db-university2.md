@@ -76,6 +76,7 @@ FROM degrees
   ON departments.id = degrees.department_id
 WHERE degrees.level = 'magistrale';
  AND degrees.department_id = '7';
+
 ```
 
 3. Selezionare tutti i corsi in cui insegna Fulvio Amato (id=44)
@@ -105,13 +106,34 @@ ORDER BY students.surname, students.name;
 5. Selezionare tutti i corsi di laurea con i relativi corsi e insegnanti
 
 ```sql
-
+SELECT
+    degrees.name 'degree_name',
+    courses.name 'course_name',
+    GROUP_CONCAT(teachers.surname, ' ', teachers.name) 'teachers'
+FROM degrees
+ JOIN courses
+  ON degrees.id = courses.degree_id
+ JOIN course_teacher
+  ON courses.id = course_teacher.course_id
+ JOIN teachers
+  ON course_teacher.teacher_id = teachers.id
+GROUP BY degrees.name, courses.name;
 ```
 
 6. Selezionare tutti i docenti che insegnano nel Dipartimento di Matematica (54)
 
 ```sql
-
+SELECT DISTINCT teachers.surname 'teacher_surname' , teachers.name 'teacher_name'
+FROM departments
+ JOIN degrees
+  ON departments.id = degrees.department_id
+ JOIN courses
+  ON degrees.id = courses.degree_id
+ JOIN course_teacher
+  ON courses.id = course_teacher.course_id
+ JOIN teachers
+  ON course_teacher.teacher_id = teachers.id
+WHERE degrees.department_id = 5;
 ```
 
 ##### Bonus
