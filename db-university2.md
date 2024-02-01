@@ -65,7 +65,8 @@ SELECT *
 FROM degrees
  JOIN departments
   ON departments.id = degrees.department_id
-WHERE degrees.level = 'magistrale';
+WHERE degrees.level = 'magistrale'
+  AND degrees.department_id = '7';
 
 -- Stampa con solo i nomi
 
@@ -74,6 +75,7 @@ FROM degrees
  JOIN departments
   ON departments.id = degrees.department_id
 WHERE degrees.level = 'magistrale';
+ AND degrees.department_id = '7';
 ```
 
 3. Selezionare tutti i corsi in cui insegna Fulvio Amato (id=44)
