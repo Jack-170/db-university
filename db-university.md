@@ -15,7 +15,8 @@ Dopo aver testato le vostre query con `phpMyAdmin`, riportatele in un file `txt`
 1. Selezionare tutti gli studenti nati nel 1990 (160)
 
 ```sql
-SELECT *, date_of_birth FROM students
+SELECT *
+FROM students
 WHERE YEAR(date_of_birth) = 1990;
 ```
 
@@ -23,13 +24,15 @@ WHERE YEAR(date_of_birth) = 1990;
 
 ```sql
 SELECT * FROM courses
-WHERE cfu > '10';
+WHERE cfu > 10;
 ```
 
 3. Selezionare tutti gli studenti che hanno più di 30 anni
 
 ```sql
-SELECT *, date_of_birth FROM students WHERE YEAR(date_of_birth) <= '1994';
+SELECT *
+FROM students
+WHERE TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()) > 30;
 ```
 
 4. Selezionare tutti i corsi del primo semestre del primo anno di un qualsiasi corso di laurea (286)
@@ -58,11 +61,12 @@ WHERE level = 'magistrale';
 7. Da quanti dipartimenti è composta l'università? (12)
 
 ```sql
-SELECT * FROM `departments`;
+SELECT COUNT(*)
+FROM departments;
 ```
 
 8. Quanti sono gli insegnanti che non hanno un numero di telefono? (50)
 
 ```sql
-SELECT * FROM teachers WHERE phone IS NULL;
+Select Count(*) FROM teachers WHERE phone IS NULL;
 ```
